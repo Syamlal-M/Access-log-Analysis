@@ -111,7 +111,7 @@ for time in count:
 
 ### Sample Result
     
-```bash
+```python
 10000 hits on 30/Mar/2019
 ```
 
@@ -161,7 +161,7 @@ for status in statuscounter: #Generating Result From the statusCounter
  
  ### Sample Result
  
- ```bash
+ ```python
  ubuntu@/~$ python3  errorstatus.py
 404
 ---
@@ -183,3 +183,47 @@ for status in statuscounter: #Generating Result From the statusCounter
 403
 ---
 ```
+
+### Python code for list the IP list of the ERROR input
+
+```python
+
+import logparser
+file = 'access_log'
+error = input('Enter the status code : ')
+stat = {}
+count = 0
+ip_list = {}
+with open('access_log','r') as fh:
+    for line in fh:
+        parsed_log = logparser.parser(line)
+        status = parsed_log['status']
+        ip = parsed_log['host']
+        if status not in stat:
+            stat[status] = []
+            stat[status].append(ip)
+        else:
+            stat[status].append(ip)
+
+for term in stat[error]:
+    if term in ip_list:
+        ip_list[term] += 1
+    else:
+        ip_list[term] = 1
+print('=====================')
+for hit in ip_list:
+    hitcount = ip_list[hit]
+    print('{:20} : {}'.format(hit,hitcount))
+```
+
+### Sample Result
+
+```python
+
+ubuntu@/:~$ python3 errorinput.py
+Enter the status code : 403
+=====================
+213.23.12.149        : 19
+ubuntu@/:~$ vi errorinput.py
+```
+
