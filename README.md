@@ -161,7 +161,7 @@ for status in statuscounter: #Generating Result From the statusCounter
  
  ### Sample Result
  
- ```python
+ ```bash
  ubuntu@/~$ python3  errorstatus.py
 404
 ---
@@ -186,7 +186,7 @@ for status in statuscounter: #Generating Result From the statusCounter
 
 ### Python code for list the IP list of the ERROR input
 
-```python
+```bash
 
 import logparser
 file = 'access_log'
@@ -218,7 +218,7 @@ for hit in ip_list:
 
 ### Sample Result
 
-```python
+```bash
 
 ubuntu@/:~$ python3 errorinput.py
 Enter the status code : 403
