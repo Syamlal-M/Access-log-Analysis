@@ -1,4 +1,4 @@
-```
+
 
 #!/usr/bin/env  python3
 
@@ -7,37 +7,17 @@
 import re
 
 
-regex_host = r'(?P<host>.*?)'
-regex_identity = r'(?P<identity>\S+)'
-regex_user = r'(?P<user>\S+)'
-regex_time = r'\[(?P<time>.*?)\]'
-regex_request = r'\"(?P<request>.*?)\"'
-regex_status = r'(?P<status>\d{3})'
-regex_size = r'(?P<size>\S+)'
-regex_referer = r'\"(?P<referer>.*?)\"'
-regex_agent = r'\"(?P<agent>.*?)\"'
-regex_space = r'\s'
+def parser(line):
 
-pattern = regex_host + regex_space + regex_identity + regex_space + \
-          regex_user + regex_space + regex_time + regex_space + \
-                  regex_request + regex_space + regex_status + regex_space + \
-                  regex_size + regex_space + regex_referer + regex_space + \
-                  regex_agent
+  try:
+
+    pattern = '(?P<host>.+?)\s(?P<identity>.+?)\s(?P<user>.+?)\s\[(?P<time>.+?)\]\s\"(?P<requests>.+?)\"\s(?P<status>\d{3})\s(?P<size>.+?)\s\"(?P<referer>.+?)\"\s\"(?P<agent>.+?)\"'
+    result = re.match(pattern,line)
+    return result.groupdict()
+
+  except:
+
+    return None
 
 
-def parser(s):
-        """
-        return type : dict()
-        return format: {
-                       host:str , identity:str , user:str ,
-                                           time:str ,request:str , status:str ,
-                                           size:str , referer:str, agent:str
-                                        }
-        returns None if failed.
-        """
-        try:
-                parts = re.match(pattern,s)
-                return parts.groupdict()
-        except Exception as err:
-                print(err)
-```
+
